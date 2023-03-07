@@ -1,0 +1,22 @@
+# JetBrains and IDE templates
+*.iml
+.idea/
+
+# All text files
+*.txt
+
+#Compiled and log files
+/target
+/bin
+/out
+*.log
+ean*
+
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
