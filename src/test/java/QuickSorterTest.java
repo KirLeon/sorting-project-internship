@@ -1,6 +1,7 @@
 import Balls.Ball;
 import Balls.BallImplementation;
 import Balls.Colors;
+import Exceptions.EmptyArrayException;
 import Sorters.QuickSorter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -36,62 +37,20 @@ public class QuickSorterTest {
     balls[6] = ball7;
   }
 
-  //  @Test
-//  public void FST_COLOR1() {
-//    Balls.Colors[] expectedColors = new Balls.Colors[7];
-//    Balls.Colors[] realColors = new Balls.Colors[7];
-//    expectedColors[0] = Balls.Colors.WHITE;
-//    expectedColors[1] = Balls.Colors.WHITE;
-//    expectedColors[2] = Balls.Colors.RED;
-//    expectedColors[3] = Balls.Colors.YELLOW;
-//    expectedColors[4] = Balls.Colors.GREEN;
-//    expectedColors[5] = Balls.Colors.PURPLE;
-//    expectedColors[6] = Balls.Colors.PURPLE;
-//    sorter.sortByColor(balls, 0, 6);
-//    for (int i = 0; i < realColors.length; i++) {
-//      realColors[i] = balls[i].getColor();
-//    }
-//    sorter.sortByColor(balls, 0, 6);
-//    Assertions.assertArrayEquals(expectedColors, realColors);
-//  }
-//
-//  @Test
-//  public void FST_WEIGHT1(){
-//    double[] expectedWeight = new double[7];
-//    double[] realDiameters = new double[7];
-//    expectedWeight[0] = 17.3;
-//    expectedWeight[1] = 23.0;
-//    expectedWeight[2] = 25;
-//    expectedWeight[3] = 25;
-//    expectedWeight[4] = 39.5;
-//    expectedWeight[5] = 40.4;
-//    expectedWeight[6] = 49.8;
-//    sorter.sortByWeight(balls, 0, 6);
-//    for(int i = 0; i< realDiameters.length; i++){
-//      realDiameters[i] = balls[i].getWeight();
-//    }
-//    Assertions.assertArrayEquals(expectedWeight, realDiameters);
-//  }
-//
-//  @Test
-//  public void FST_DIAMETER1(){
-//    double[] expectedDiameters = new double[7];
-//    double[] realDiameters = new double[7];
-//    expectedDiameters[0] = 12.8;
-//    expectedDiameters[1] = 12.8;
-//    expectedDiameters[2] = 15.0;
-//    expectedDiameters[3] = 15.8;
-//    expectedDiameters[4] = 15.8;
-//    expectedDiameters[5] = 16.0;
-//    expectedDiameters[6] = 28.4;
-//    sorter.sortByDiameter(balls, 0, 6);
-//    for(int i = 0; i< realDiameters.length; i++){
-//      realDiameters[i] = balls[i].getDiameter();
-//    }
-//    Assertions.assertArrayEquals(expectedDiameters, realDiameters);
-//  }
   @Test
-  public void FST_MENU_COLORS1() {
+  public void quickCheckExceptionTest() {
+    Ball[] emptyBalls = null;
+    Ball[] halfEmptyBallArray = new Ball[]{balls[2], balls[5], null, balls[1], null};
+    EmptyArrayException thrownException1 = Assertions.assertThrows(EmptyArrayException.class,
+        () -> sorter.sort(emptyBalls, -3));
+    EmptyArrayException thrownException2 = Assertions.assertThrows(EmptyArrayException.class,
+        () -> sorter.sort(halfEmptyBallArray, 2));
+    Assertions.assertTrue(thrownException1.getMessage().contentEquals("Array is empty"));
+    Assertions.assertTrue(thrownException2.getMessage().contentEquals("Element 2 is null"));
+  }
+
+  @Test
+  public void quickSorterColors() {
     Colors[] expectedColors = new Colors[7];
     Colors[] realColors = new Colors[7];
     expectedColors[0] = Colors.WHITE;
@@ -101,7 +60,11 @@ public class QuickSorterTest {
     expectedColors[4] = Colors.GREEN;
     expectedColors[5] = Colors.PURPLE;
     expectedColors[6] = Colors.PURPLE;
-    balls = sorter.sort(balls, 1);
+    try {
+      balls = sorter.sort(balls, 1);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realColors.length; i++) {
       realColors[i] = balls[i].getColor();
     }
@@ -109,7 +72,7 @@ public class QuickSorterTest {
   }
 
   @Test
-  public void FST_MENU_DIAMETER1() {
+  public void quickSorterDiameters() {
     double[] expectedDiameters = new double[7];
     double[] realDiameters = new double[7];
     expectedDiameters[0] = 12.8;
@@ -119,7 +82,11 @@ public class QuickSorterTest {
     expectedDiameters[4] = 15.8;
     expectedDiameters[5] = 16.0;
     expectedDiameters[6] = 28.4;
-    balls = sorter.sort(balls, 2);
+    try {
+      balls = sorter.sort(balls, 2);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realDiameters.length; i++) {
       realDiameters[i] = balls[i].getDiameter();
     }
@@ -127,7 +94,7 @@ public class QuickSorterTest {
   }
 
   @Test
-  public void FST_MENU_WEIGHT1() {
+  public void quickSorterWeights() {
     double[] expectedWeight = new double[7];
     double[] realDiameters = new double[7];
     expectedWeight[0] = 17.3;
@@ -137,7 +104,11 @@ public class QuickSorterTest {
     expectedWeight[4] = 39.5;
     expectedWeight[5] = 40.4;
     expectedWeight[6] = 49.8;
-    balls = sorter.sort(balls, 3);
+    try {
+      balls = sorter.sort(balls, 3);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realDiameters.length; i++) {
       realDiameters[i] = balls[i].getWeight();
     }
@@ -145,7 +116,7 @@ public class QuickSorterTest {
   }
 
   @Test
-  public void FST_MENU_REVERSE_COLORS1() {
+  public void quickSorterDescendingColors() {
     Colors[] expectedColors = new Colors[7];
     Colors[] realColors = new Colors[7];
     expectedColors[0] = Colors.PURPLE;
@@ -155,7 +126,11 @@ public class QuickSorterTest {
     expectedColors[4] = Colors.RED;
     expectedColors[5] = Colors.WHITE;
     expectedColors[6] = Colors.WHITE;
-    balls = sorter.sort(balls, -1);
+    try {
+      balls = sorter.sort(balls, -1);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realColors.length; i++) {
       realColors[i] = balls[i].getColor();
     }
@@ -163,7 +138,7 @@ public class QuickSorterTest {
   }
 
   @Test
-  public void FST_MENU_REVERSE_DIAMETER1() {
+  public void quickSorterDescendingDiameters() {
     double[] expectedDiameters = new double[7];
     double[] realDiameters = new double[7];
     expectedDiameters[0] = 28.4;
@@ -173,7 +148,11 @@ public class QuickSorterTest {
     expectedDiameters[4] = 15.0;
     expectedDiameters[5] = 12.8;
     expectedDiameters[6] = 12.8;
-    balls = sorter.sort(balls, -2);
+    try {
+      balls = sorter.sort(balls, -2);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realDiameters.length; i++) {
       realDiameters[i] = balls[i].getDiameter();
     }
@@ -181,7 +160,7 @@ public class QuickSorterTest {
   }
 
   @Test
-  public void FST_MENU_REVERSE_WEIGHT1() {
+  public void quickSorterDescendingWeights() {
     double[] expectedWeight = new double[7];
     double[] realDiameters = new double[7];
     expectedWeight[0] = 49.8;
@@ -191,7 +170,11 @@ public class QuickSorterTest {
     expectedWeight[4] = 25;
     expectedWeight[5] = 23.0;
     expectedWeight[6] = 17.3;
-    balls = sorter.sort(balls, -3);
+    try {
+      balls = sorter.sort(balls, -3);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realDiameters.length; i++) {
       realDiameters[i] = balls[i].getWeight();
     }

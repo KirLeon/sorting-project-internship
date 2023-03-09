@@ -1,61 +1,64 @@
 package Sorters;
 
 import Balls.Ball;
+import Exceptions.EmptyArrayException;
 
-public class MergeSorter implements Sorter {
+public class MergeSorter implements Sortable {
 
   public Ball[] sortByColor(Ball[] balls) {
     switch (balls.length) {
-      case 1:
+      case 1 -> {
         return balls;
-      case 2:
+      }
+      case 2 -> {
         if (balls[0].getColor().ordinal() > balls[1].getColor().ordinal()) {
           Ball swapBall = balls[0];
           balls[0] = balls[1];
           balls[1] = swapBall;
         }
         return balls;
-      default: {
-        Ball[] leftHalf;
-        Ball[] rightHalf;
-        int rightSize = balls.length / 2;
-        rightHalf = new Ball[rightSize];
-        int leftSize = balls.length % 2 == 0 ? rightSize : rightSize + 1;
-        leftHalf = new Ball[leftSize];
-        rightSize = 0;
+      }
+      default -> {
+        Ball[] leftHalfArray;
+        Ball[] rightHalfArray;
+        int sizeOfRightArray = balls.length / 2;
+        rightHalfArray = new Ball[sizeOfRightArray];
+        int sizeOfLeftArray = balls.length % 2 == 0 ? sizeOfRightArray : sizeOfRightArray + 1;
+        leftHalfArray = new Ball[sizeOfLeftArray];
+        sizeOfRightArray = 0;
         for (int i = 0; i < balls.length; i++) {
-          if (i < leftSize) {
-            leftHalf[i] = balls[i];
+          if (i < sizeOfLeftArray) {
+            leftHalfArray[i] = balls[i];
           } else {
-            rightHalf[rightSize] = balls[i];
-            rightSize++;
+            rightHalfArray[sizeOfRightArray] = balls[i];
+            sizeOfRightArray++;
           }
         }
-        sortByColor(leftHalf);
-        sortByColor(rightHalf);
+        sortByColor(leftHalfArray);
+        sortByColor(rightHalfArray);
         int leftInd = 0, rightInd = 0;
         for (int i = 0; i < balls.length; i++) {
-          if (leftInd >= leftHalf.length) {
-            while (rightInd < rightHalf.length) {
-              balls[i] = rightHalf[rightInd];
+          if (leftInd >= leftHalfArray.length) {
+            while (rightInd < rightHalfArray.length) {
+              balls[i] = rightHalfArray[rightInd];
               i++;
               rightInd++;
             }
             break;
-          } else if (rightInd >= rightHalf.length) {
-            while (leftInd < leftHalf.length) {
-              balls[i] = leftHalf[leftInd];
+          } else if (rightInd >= rightHalfArray.length) {
+            while (leftInd < leftHalfArray.length) {
+              balls[i] = leftHalfArray[leftInd];
               i++;
               leftInd++;
             }
             break;
           }
-          if (leftHalf[leftInd].getColor().ordinal() <
-              rightHalf[rightInd].getColor().ordinal()) {
-            balls[i] = leftHalf[leftInd];
+          if (leftHalfArray[leftInd].getColor().ordinal() < rightHalfArray[rightInd].getColor()
+              .ordinal()) {
+            balls[i] = leftHalfArray[leftInd];
             leftInd++;
           } else {
-            balls[i] = rightHalf[rightInd];
+            balls[i] = rightHalfArray[rightInd];
             rightInd++;
           }
         }
@@ -66,56 +69,57 @@ public class MergeSorter implements Sorter {
 
   public Ball[] sortByDiameter(Ball[] balls) {
     switch (balls.length) {
-      case 1:
+      case 1 -> {
         return balls;
-      case 2:
+      }
+      case 2 -> {
         if (balls[0].getDiameter() > balls[1].getDiameter()) {
           Ball swapBall = balls[0];
           balls[0] = balls[1];
           balls[1] = swapBall;
         }
         return balls;
-      default: {
-        Ball[] leftHalf;
-        Ball[] rightHalf;
-        int rightSize = balls.length / 2;
-        rightHalf = new Ball[rightSize];
-        int leftSize = balls.length % 2 == 0 ? rightSize : rightSize + 1;
-        leftHalf = new Ball[leftSize];
-        rightSize = 0;
+      }
+      default -> {
+        Ball[] leftHalfArray;
+        Ball[] rightHalfArray;
+        int sizeOfRightArray = balls.length / 2;
+        rightHalfArray = new Ball[sizeOfRightArray];
+        int sizeOfLeftArray = balls.length % 2 == 0 ? sizeOfRightArray : sizeOfRightArray + 1;
+        leftHalfArray = new Ball[sizeOfLeftArray];
+        sizeOfRightArray = 0;
         for (int i = 0; i < balls.length; i++) {
-          if (i < leftSize) {
-            leftHalf[i] = balls[i];
+          if (i < sizeOfLeftArray) {
+            leftHalfArray[i] = balls[i];
           } else {
-            rightHalf[rightSize] = balls[i];
-            rightSize++;
+            rightHalfArray[sizeOfRightArray] = balls[i];
+            sizeOfRightArray++;
           }
         }
-        sortByDiameter(leftHalf);
-        sortByDiameter(rightHalf);
+        sortByDiameter(leftHalfArray);
+        sortByDiameter(rightHalfArray);
         int leftInd = 0, rightInd = 0;
         for (int i = 0; i < balls.length; i++) {
-          if (leftInd >= leftHalf.length) {
-            while (rightInd < rightHalf.length) {
-              balls[i] = rightHalf[rightInd];
+          if (leftInd >= leftHalfArray.length) {
+            while (rightInd < rightHalfArray.length) {
+              balls[i] = rightHalfArray[rightInd];
               i++;
               rightInd++;
             }
             break;
-          } else if (rightInd >= rightHalf.length) {
-            while (leftInd < leftHalf.length) {
-              balls[i] = leftHalf[leftInd];
+          } else if (rightInd >= rightHalfArray.length) {
+            while (leftInd < leftHalfArray.length) {
+              balls[i] = leftHalfArray[leftInd];
               i++;
               leftInd++;
             }
             break;
           }
-          if (leftHalf[leftInd].getDiameter() <
-              rightHalf[rightInd].getDiameter()) {
-            balls[i] = leftHalf[leftInd];
+          if (leftHalfArray[leftInd].getDiameter() < rightHalfArray[rightInd].getDiameter()) {
+            balls[i] = leftHalfArray[leftInd];
             leftInd++;
           } else {
-            balls[i] = rightHalf[rightInd];
+            balls[i] = rightHalfArray[rightInd];
             rightInd++;
           }
         }
@@ -125,57 +129,59 @@ public class MergeSorter implements Sorter {
   }
 
   public Ball[] sortByWeight(Ball[] balls) {
+
     switch (balls.length) {
-      case 1:
+      case 1 -> {
         return balls;
-      case 2:
+      }
+      case 2 -> {
         if (balls[0].getWeight() > balls[1].getWeight()) {
           Ball swapBall = balls[0];
           balls[0] = balls[1];
           balls[1] = swapBall;
         }
         return balls;
-      default: {
-        Ball[] leftHalf;
-        Ball[] rightHalf;
-        int rightSize = balls.length / 2;
-        rightHalf = new Ball[rightSize];
-        int leftSize = balls.length % 2 == 0 ? rightSize : rightSize + 1;
-        leftHalf = new Ball[leftSize];
-        rightSize = 0;
+      }
+      default -> {
+        Ball[] leftHalfArray;
+        Ball[] rightHalfArray;
+        int sizeOfRightArray = balls.length / 2;
+        rightHalfArray = new Ball[sizeOfRightArray];
+        int sizeOfLeftArray = balls.length % 2 == 0 ? sizeOfRightArray : sizeOfRightArray + 1;
+        leftHalfArray = new Ball[sizeOfLeftArray];
+        sizeOfRightArray = 0;
         for (int i = 0; i < balls.length; i++) {
-          if (i < leftSize) {
-            leftHalf[i] = balls[i];
+          if (i < sizeOfLeftArray) {
+            leftHalfArray[i] = balls[i];
           } else {
-            rightHalf[rightSize] = balls[i];
-            rightSize++;
+            rightHalfArray[sizeOfRightArray] = balls[i];
+            sizeOfRightArray++;
           }
         }
-        sortByWeight(leftHalf);
-        sortByWeight(rightHalf);
+        sortByWeight(leftHalfArray);
+        sortByWeight(rightHalfArray);
         int leftInd = 0, rightInd = 0;
         for (int i = 0; i < balls.length; i++) {
-          if (leftInd >= leftHalf.length) {
-            while (rightInd < rightHalf.length) {
-              balls[i] = rightHalf[rightInd];
+          if (leftInd >= leftHalfArray.length) {
+            while (rightInd < rightHalfArray.length) {
+              balls[i] = rightHalfArray[rightInd];
               i++;
               rightInd++;
             }
             break;
-          } else if (rightInd >= rightHalf.length) {
-            while (leftInd < leftHalf.length) {
-              balls[i] = leftHalf[leftInd];
+          } else if (rightInd >= rightHalfArray.length) {
+            while (leftInd < leftHalfArray.length) {
+              balls[i] = leftHalfArray[leftInd];
               i++;
               leftInd++;
             }
             break;
           }
-          if (leftHalf[leftInd].getWeight() <
-              rightHalf[rightInd].getWeight()) {
-            balls[i] = leftHalf[leftInd];
+          if (leftHalfArray[leftInd].getWeight() < rightHalfArray[rightInd].getWeight()) {
+            balls[i] = leftHalfArray[leftInd];
             leftInd++;
           } else {
-            balls[i] = rightHalf[rightInd];
+            balls[i] = rightHalfArray[rightInd];
             rightInd++;
           }
         }
@@ -185,20 +191,23 @@ public class MergeSorter implements Sorter {
   }
 
   @Override
-  public Ball[] sort(Ball[] balls, int k) {
-    Ball[] resultArray = new Ball[balls.length];
-    switch (Math.abs(k)) {
-      case 1:
-        sortByColor(balls);
-        break;
-      case 2:
-        sortByDiameter(balls);
-        break;
-      case 3:
-        sortByWeight(balls);
-        break;
+  public Ball[] sort(Ball[] balls, int sortTypeIndex) throws EmptyArrayException {
+    if (balls == null) {
+      throw new EmptyArrayException("Array is empty");
     }
-    if (k < 0) {
+    for (int i = 0; i < balls.length; i++) {
+      if (balls[i] == null) {
+        String exception = String.format("Element %d is null", i);
+        throw new EmptyArrayException(exception);
+      }
+    }
+    Ball[] resultArray = new Ball[balls.length];
+    switch (Math.abs(sortTypeIndex)) {
+      case 1 -> sortByColor(balls);
+      case 2 -> sortByDiameter(balls);
+      case 3 -> sortByWeight(balls);
+    }
+    if (sortTypeIndex < 0) {
       int index = 0;
       for (int i = balls.length - 1; i >= 0; i--) {
         resultArray[index] = balls[i];

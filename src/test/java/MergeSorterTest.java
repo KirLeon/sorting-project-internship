@@ -1,6 +1,9 @@
+
+
 import Balls.Ball;
 import Balls.BallImplementation;
 import Balls.Colors;
+import Exceptions.EmptyArrayException;
 import Sorters.MergeSorter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -37,7 +40,19 @@ public class MergeSorterTest {
   }
 
   @Test
-  public void MRG_COLOR1() {
+  public void mergeCheckExceptionTest() {
+    Ball[] emptyBalls = null;
+    Ball[] halfEmptyBallArray = new Ball[]{balls[2], balls[5], null, balls[1], null};
+    EmptyArrayException thrownException1 = Assertions.assertThrows(EmptyArrayException.class,
+        () -> sorter.sort(emptyBalls, -3));
+    EmptyArrayException thrownException2 = Assertions.assertThrows(EmptyArrayException.class,
+        () -> sorter.sort(halfEmptyBallArray, 2));
+    Assertions.assertTrue(thrownException1.getMessage().contentEquals("Array is empty"));
+    Assertions.assertTrue(thrownException2.getMessage().contentEquals("Element 2 is null"));
+  }
+
+  @Test
+  public void mergeSortColors() {
     Colors[] expectedColors = new Colors[7];
     Colors[] realColors = new Colors[7];
     expectedColors[0] = Colors.WHITE;
@@ -47,7 +62,11 @@ public class MergeSorterTest {
     expectedColors[4] = Colors.GREEN;
     expectedColors[5] = Colors.CYAN;
     expectedColors[6] = Colors.PURPLE;
-    balls = sorter.sort(balls, 1);
+    try {
+      balls = sorter.sort(balls, 1);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realColors.length; i++) {
       realColors[i] = balls[i].getColor();
     }
@@ -55,7 +74,7 @@ public class MergeSorterTest {
   }
 
   @Test
-  public void MRG_DIAMETER1() {
+  public void mergeSortDiameters() {
     double[] expectedDiameters = new double[7];
     double[] realDiameters = new double[7];
     expectedDiameters[0] = 13.0;
@@ -65,7 +84,11 @@ public class MergeSorterTest {
     expectedDiameters[4] = 23.0;
     expectedDiameters[5] = 27.0;
     expectedDiameters[6] = 52.3;
-    balls = sorter.sort(balls, 2);
+    try {
+      balls = sorter.sort(balls, 2);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realDiameters.length; i++) {
       realDiameters[i] = balls[i].getDiameter();
     }
@@ -73,7 +96,7 @@ public class MergeSorterTest {
   }
 
   @Test
-  public void MRG_WEIGHT() {
+  public void mergeSortWeights() {
     double[] expectedWeights = new double[7];
     double[] realWeights = new double[7];
     expectedWeights[0] = 17.4;
@@ -83,7 +106,11 @@ public class MergeSorterTest {
     expectedWeights[4] = 28;
     expectedWeights[5] = 39.2;
     expectedWeights[6] = 44.0;
-    balls = sorter.sort(balls, 3);
+    try {
+      balls = sorter.sort(balls, 3);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realWeights.length; i++) {
       realWeights[i] = balls[i].getWeight();
     }
@@ -91,7 +118,7 @@ public class MergeSorterTest {
   }
 
   @Test
-  public void MRG_REVERSE_COLOR1() {
+  public void mergeSortDescendingColors() {
     Colors[] expectedColors = new Colors[7];
     Colors[] realColors = new Colors[7];
     expectedColors[0] = Colors.PURPLE;
@@ -101,7 +128,11 @@ public class MergeSorterTest {
     expectedColors[4] = Colors.YELLOW;
     expectedColors[5] = Colors.ORANGE;
     expectedColors[6] = Colors.WHITE;
-    balls = sorter.sort(balls, -1);
+    try {
+      balls = sorter.sort(balls, -1);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realColors.length; i++) {
       realColors[i] = balls[i].getColor();
     }
@@ -109,7 +140,7 @@ public class MergeSorterTest {
   }
 
   @Test
-  public void MRG_REVERSE_DIAMETER1() {
+  public void mergeSortDescendingDiameters() {
     double[] expectedDiameters = new double[7];
     double[] realDiameters = new double[7];
     expectedDiameters[0] = 52.3;
@@ -119,7 +150,11 @@ public class MergeSorterTest {
     expectedDiameters[4] = 19.8;
     expectedDiameters[5] = 18.4;
     expectedDiameters[6] = 13.0;
-    balls = sorter.sort(balls, -2);
+    try {
+      balls = sorter.sort(balls, -2);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realDiameters.length; i++) {
       realDiameters[i] = balls[i].getDiameter();
     }
@@ -128,7 +163,7 @@ public class MergeSorterTest {
 
 
   @Test
-  public void MRG_REVERSE_WEIGHT() {
+  public void mergeSortDescendingWeights() {
     double[] expectedWeights = new double[7];
     double[] realWeights = new double[7];
     expectedWeights[0] = 44.0;
@@ -138,7 +173,11 @@ public class MergeSorterTest {
     expectedWeights[4] = 17.4;
     expectedWeights[5] = 17.4;
     expectedWeights[6] = 17.4;
-    balls = sorter.sort(balls, -3);
+    try {
+      balls = sorter.sort(balls, -3);
+    } catch (EmptyArrayException e) {
+      throw new RuntimeException(e);
+    }
     for (int i = 0; i < realWeights.length; i++) {
       realWeights[i] = balls[i].getWeight();
     }
