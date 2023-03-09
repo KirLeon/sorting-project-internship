@@ -1,22 +1,22 @@
 import com.innowise.Balls.Ball;
 import com.innowise.Balls.BallImplementation;
 import com.innowise.Balls.Colors;
-import com.innowise.ConcurrentSorters.ConcurrentMergeSorter;
+import com.innowise.ConcurrentSorters.ConcurrentEvenOddSorter;
 import com.innowise.Exceptions.EmptyArrayException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ConcurrencyMergeSorterTest {
+public class ConcurrentEvenOddSorterTest {
 
   private static Ball[] balls;
-  private static ConcurrentMergeSorter sorter;
+  private static ConcurrentEvenOddSorter sorter;
 
   @BeforeAll
   public static void setup() {
     balls = new Ball[7];
-    sorter = new ConcurrentMergeSorter();
+    sorter = new ConcurrentEvenOddSorter();
   }
 
   @BeforeEach
