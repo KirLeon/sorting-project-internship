@@ -1,4 +1,4 @@
-package Balls;
+package com.innowise.Balls;
 
 public class BallImplementation implements Ball {
 

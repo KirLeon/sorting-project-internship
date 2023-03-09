@@ -1,4 +1,4 @@
-package Balls;
+package com.innowise.Balls;
 
 public interface Ball {
 

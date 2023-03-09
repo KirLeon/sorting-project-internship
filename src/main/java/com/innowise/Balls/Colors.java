@@ -1,4 +1,4 @@
-package Balls;
+package com.innowise.Balls;
 
 public enum Colors {
   WHITE("White"), RED("Red"), ORANGE("Orange"), YELLOW("Yellow"),

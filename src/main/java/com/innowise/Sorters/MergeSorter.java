@@ -1,7 +1,7 @@
-package Sorters;
+package com.innowise.Sorters;
 
-import Balls.Ball;
-import Exceptions.EmptyArrayException;
+import com.innowise.Balls.Ball;
+import com.innowise.Exceptions.EmptyArrayException;
 
 public class MergeSorter implements Sortable {
 

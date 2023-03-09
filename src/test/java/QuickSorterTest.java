@@ -1,8 +1,8 @@
-import Balls.Ball;
-import Balls.BallImplementation;
-import Balls.Colors;
-import Exceptions.EmptyArrayException;
-import Sorters.QuickSorter;
+import com.innowise.Balls.Ball;
+import com.innowise.Balls.BallImplementation;
+import com.innowise.Balls.Colors;
+import com.innowise.Exceptions.EmptyArrayException;
+import com.innowise.Sorters.QuickSorter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
