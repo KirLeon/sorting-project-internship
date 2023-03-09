@@ -1,9 +1,10 @@
-package com.innowise.Sorters;
+package com.innowise.ConcurrentSorters;
 
 import com.innowise.Balls.Ball;
 import com.innowise.Exceptions.EmptyArrayException;
+import com.innowise.Sorters.Sortable;
 
-public class MergeSorter implements Sortable {
+public class ConcurrentMergeSorter implements Sortable {
 
   public Ball[] sortByColor(Ball[] balls) {
     switch (balls.length) {
@@ -34,8 +35,26 @@ public class MergeSorter implements Sortable {
             sizeOfRightArray++;
           }
         }
-        sortByColor(leftHalfArray);
-        sortByColor(rightHalfArray);
+        try {
+          Thread leftSorterThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+              sortByColor(rightHalfArray);
+            }
+          });
+          Thread rightSorterThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+              sortByColor(leftHalfArray);
+            }
+          });
+          leftSorterThread.start();
+          rightSorterThread.start();
+          leftSorterThread.join();
+          rightSorterThread.join();
+        } catch (InterruptedException interruptedException) {
+          interruptedException.printStackTrace();
+        }
         int leftInd = 0, rightInd = 0;
         for (int i = 0; i < balls.length; i++) {
           if (leftInd >= leftHalfArray.length) {
@@ -96,8 +115,26 @@ public class MergeSorter implements Sortable {
             sizeOfRightArray++;
           }
         }
-        sortByDiameter(leftHalfArray);
-        sortByDiameter(rightHalfArray);
+        try {
+          Thread leftSorterThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+              sortByDiameter(rightHalfArray);
+            }
+          });
+          Thread rightSorterThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+              sortByDiameter(leftHalfArray);
+            }
+          });
+          leftSorterThread.start();
+          rightSorterThread.start();
+          leftSorterThread.join();
+          rightSorterThread.join();
+        } catch (InterruptedException interruptedException) {
+          interruptedException.printStackTrace();
+        }
         int leftInd = 0, rightInd = 0;
         for (int i = 0; i < balls.length; i++) {
           if (leftInd >= leftHalfArray.length) {
@@ -157,8 +194,26 @@ public class MergeSorter implements Sortable {
             sizeOfRightArray++;
           }
         }
-        sortByWeight(leftHalfArray);
-        sortByWeight(rightHalfArray);
+        try {
+          Thread leftSorterThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+              sortByWeight(rightHalfArray);
+            }
+          });
+          Thread rightSorterThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+              sortByWeight(leftHalfArray);
+            }
+          });
+          leftSorterThread.start();
+          rightSorterThread.start();
+          leftSorterThread.join();
+          rightSorterThread.join();
+        } catch (InterruptedException interruptedException) {
+          interruptedException.printStackTrace();
+        }
         int leftInd = 0, rightInd = 0;
         for (int i = 0; i < balls.length; i++) {
           if (leftInd >= leftHalfArray.length) {
