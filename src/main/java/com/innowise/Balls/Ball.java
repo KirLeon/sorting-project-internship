@@ -1,16 +1,40 @@
 package com.innowise.Balls;
 
-public interface Ball {
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-  public double getWeight();
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+public class Ball implements BallInterface {
 
-  public void setWeight(double mass);
+  private double weight;
+  private double diameter;
+  private Colors color;
 
-  public double getDiameter();
+  public double getWeight() {
+    return weight;
+  }
 
-  public void setDiameter(double mass);
+  public void setWeight(double weight) {
+    this.weight = Ball.this.weight;
+  }
 
-  public Colors getColor();
+  public double getDiameter() {
+    return diameter;
+  }
 
-  public void setColor(String color);
+  public void setDiameter(double diameter) {
+    this.diameter = diameter;
+  }
+
+  public Colors getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = Colors.valueOf(color);
+  }
+
 }

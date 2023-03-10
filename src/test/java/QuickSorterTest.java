@@ -1,5 +1,5 @@
+import com.innowise.Balls.BallInterface;
 import com.innowise.Balls.Ball;
-import com.innowise.Balls.BallImplementation;
 import com.innowise.Balls.Colors;
 import com.innowise.Exceptions.EmptyArrayException;
 import com.innowise.Sorters.QuickSorter;
@@ -10,24 +10,24 @@ import org.junit.jupiter.api.Test;
 
 public class QuickSorterTest {
 
-  private static Ball[] balls;
+  private static BallInterface[] balls;
   private static QuickSorter sorter;
 
   @BeforeAll
   public static void setup() {
-    balls = new Ball[7];
+    balls = new BallInterface[7];
     sorter = new QuickSorter();
   }
 
   @BeforeEach
   public void clean() {
-    Ball ball1 = new BallImplementation(40.4, 12.8, Colors.PURPLE);
-    Ball ball2 = new BallImplementation(39.5, 15.8, Colors.RED);
-    Ball ball3 = new BallImplementation(23.0, 16.0, Colors.YELLOW);
-    Ball ball4 = new BallImplementation(49.8, 15.8, Colors.WHITE);
-    Ball ball5 = new BallImplementation(25, 28.4, Colors.WHITE);
-    Ball ball6 = new BallImplementation(17.3, 15.0, Colors.GREEN);
-    Ball ball7 = new BallImplementation(25, 12.8, Colors.PURPLE);
+    BallInterface ball1 = new Ball(40.4, 12.8, Colors.PURPLE);
+    BallInterface ball2 = new Ball(39.5, 15.8, Colors.RED);
+    BallInterface ball3 = new Ball(23.0, 16.0, Colors.YELLOW);
+    BallInterface ball4 = new Ball(49.8, 15.8, Colors.WHITE);
+    BallInterface ball5 = new Ball(25, 28.4, Colors.WHITE);
+    BallInterface ball6 = new Ball(17.3, 15.0, Colors.GREEN);
+    BallInterface ball7 = new Ball(25, 12.8, Colors.PURPLE);
     balls[0] = ball1;
     balls[1] = ball2;
     balls[2] = ball3;
@@ -39,8 +39,8 @@ public class QuickSorterTest {
 
   @Test
   public void quickCheckExceptionTest() {
-    Ball[] emptyBalls = null;
-    Ball[] halfEmptyBallArray = new Ball[]{balls[2], balls[5], null, balls[1], null};
+    BallInterface[] emptyBalls = null;
+    BallInterface[] halfEmptyBallArray = new BallInterface[]{balls[2], balls[5], null, balls[1], null};
     EmptyArrayException thrownException1 = Assertions.assertThrows(EmptyArrayException.class,
         () -> sorter.sort(emptyBalls, -3));
     EmptyArrayException thrownException2 = Assertions.assertThrows(EmptyArrayException.class,

@@ -1,41 +1,35 @@
 package com.innowise.ConcurrentSorters;
 
-import com.innowise.Balls.Ball;
+import com.innowise.Balls.BallInterface;
 import com.innowise.Exceptions.EmptyArrayException;
 import com.innowise.Sorters.Sortable;
 
 public class ConcurrentEvenOddSorter implements Sortable {
 
-  public Ball[] sortByColor(Ball[] balls) {
+  public BallInterface[] sortByColor(BallInterface[] balls) {
     final boolean[] isSorted = {false};
     //Using final one-element array to access variable within inner class
     Thread threadSorterOdd;
     Thread threadSorterEven;
-    while (isSorted[0] == false) {
+    while (!isSorted[0]) {
       isSorted[0] = true;
-      threadSorterOdd = new Thread(new Runnable() {
-        @Override
-        public void run() {
-          for (int i = 0; i < balls.length - 1; i += 2) {
-            if (balls[i].getColor().ordinal() > balls[i + 1].getColor().ordinal()) {
-              isSorted[0] = false;
-              Ball swapBall = balls[i];
-              balls[i] = balls[i + 1];
-              balls[i + 1] = swapBall;
-            }
+      threadSorterOdd = new Thread(() -> {
+        for (int i = 0; i < balls.length - 1; i += 2) {
+          if (balls[i].getColor().ordinal() > balls[i + 1].getColor().ordinal()) {
+            isSorted[0] = false;
+            BallInterface swapBall = balls[i];
+            balls[i] = balls[i + 1];
+            balls[i + 1] = swapBall;
           }
         }
       });
-      threadSorterEven = new Thread(new Runnable() {
-        @Override
-        public void run() {
-          for (int i = 1; i < balls.length - 1; i += 2) {
-            if (balls[i].getColor().ordinal() > balls[i + 1].getColor().ordinal()) {
-              isSorted[0] = false;
-              Ball swapBall = balls[i];
-              balls[i] = balls[i + 1];
-              balls[i + 1] = swapBall;
-            }
+      threadSorterEven = new Thread(() -> {
+        for (int i = 1; i < balls.length - 1; i += 2) {
+          if (balls[i].getColor().ordinal() > balls[i + 1].getColor().ordinal()) {
+            isSorted[0] = false;
+            BallInterface swapBall = balls[i];
+            balls[i] = balls[i + 1];
+            balls[i + 1] = swapBall;
           }
         }
       });
@@ -51,36 +45,30 @@ public class ConcurrentEvenOddSorter implements Sortable {
     return balls;
   }
 
-  public Ball[] sortByDiameter(Ball[] balls) {
+  public BallInterface[] sortByDiameter(BallInterface[] balls) {
     final boolean[] isSorted = {false};
     //Using final one-element array to access variable within inner class
     Thread threadSorterOdd;
     Thread threadSorterEven;
-    while (isSorted[0] == false) {
+    while (!isSorted[0]) {
       isSorted[0] = true;
-      threadSorterOdd = new Thread(new Runnable() {
-        @Override
-        public void run() {
-          for (int i = 0; i < balls.length - 1; i += 2) {
-            if (balls[i].getDiameter() > balls[i + 1].getDiameter()) {
-              isSorted[0] = false;
-              Ball swapBall = balls[i];
-              balls[i] = balls[i + 1];
-              balls[i + 1] = swapBall;
-            }
+      threadSorterOdd = new Thread(() -> {
+        for (int i = 0; i < balls.length - 1; i += 2) {
+          if (balls[i].getDiameter() > balls[i + 1].getDiameter()) {
+            isSorted[0] = false;
+            BallInterface swapBall = balls[i];
+            balls[i] = balls[i + 1];
+            balls[i + 1] = swapBall;
           }
         }
       });
-      threadSorterEven = new Thread(new Runnable() {
-        @Override
-        public void run() {
-          for (int i = 1; i < balls.length - 1; i += 2) {
-            if (balls[i].getDiameter() > balls[i + 1].getDiameter()) {
-              isSorted[0] = false;
-              Ball swapBall = balls[i];
-              balls[i] = balls[i + 1];
-              balls[i + 1] = swapBall;
-            }
+      threadSorterEven = new Thread(() -> {
+        for (int i = 1; i < balls.length - 1; i += 2) {
+          if (balls[i].getDiameter() > balls[i + 1].getDiameter()) {
+            isSorted[0] = false;
+            BallInterface swapBall = balls[i];
+            balls[i] = balls[i + 1];
+            balls[i + 1] = swapBall;
           }
         }
       });
@@ -96,36 +84,30 @@ public class ConcurrentEvenOddSorter implements Sortable {
     return balls;
   }
 
-  public Ball[] sortByWeight(Ball[] balls) {
+  public BallInterface[] sortByWeight(BallInterface[] balls) {
     final boolean[] isSorted = {false};
     //Using final one-element array to access variable within inner class
     Thread threadSorterOdd;
     Thread threadSorterEven;
-    while (isSorted[0] == false) {
+    while (!isSorted[0]) {
       isSorted[0] = true;
-      threadSorterOdd = new Thread(new Runnable() {
-        @Override
-        public void run() {
-          for (int i = 0; i < balls.length - 1; i += 2) {
-            if (balls[i].getWeight() > balls[i + 1].getWeight()) {
-              isSorted[0] = false;
-              Ball swapBall = balls[i];
-              balls[i] = balls[i + 1];
-              balls[i + 1] = swapBall;
-            }
+      threadSorterOdd = new Thread(() -> {
+        for (int i = 0; i < balls.length - 1; i += 2) {
+          if (balls[i].getWeight() > balls[i + 1].getWeight()) {
+            isSorted[0] = false;
+            BallInterface swapBall = balls[i];
+            balls[i] = balls[i + 1];
+            balls[i + 1] = swapBall;
           }
         }
       });
-      threadSorterEven = new Thread(new Runnable() {
-        @Override
-        public void run() {
-          for (int i = 1; i < balls.length - 1; i += 2) {
-            if (balls[i].getWeight() > balls[i + 1].getWeight()) {
-              isSorted[0] = false;
-              Ball swapBall = balls[i];
-              balls[i] = balls[i + 1];
-              balls[i + 1] = swapBall;
-            }
+      threadSorterEven = new Thread(() -> {
+        for (int i = 1; i < balls.length - 1; i += 2) {
+          if (balls[i].getWeight() > balls[i + 1].getWeight()) {
+            isSorted[0] = false;
+            BallInterface swapBall = balls[i];
+            balls[i] = balls[i + 1];
+            balls[i + 1] = swapBall;
           }
         }
       });
@@ -142,7 +124,7 @@ public class ConcurrentEvenOddSorter implements Sortable {
   }
 
   @Override
-  public Ball[] sort(Ball[] balls, int sortTypeIndex) throws EmptyArrayException {
+  public BallInterface[] sort(BallInterface[] balls, int sortTypeIndex) throws EmptyArrayException {
     if (balls == null) {
       throw new EmptyArrayException("Array is empty");
     }
@@ -152,7 +134,7 @@ public class ConcurrentEvenOddSorter implements Sortable {
         throw new EmptyArrayException(exception);
       }
     }
-    Ball[] resultArray = new Ball[balls.length];
+    BallInterface[] resultArray = new BallInterface[balls.length];
     switch (Math.abs(sortTypeIndex)) {
       case 1 -> sortByColor(balls);
       case 2 -> sortByDiameter(balls);

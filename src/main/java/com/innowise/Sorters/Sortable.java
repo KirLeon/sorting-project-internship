@@ -1,9 +1,9 @@
 package com.innowise.Sorters;
 
-import com.innowise.Balls.Ball;
+import com.innowise.Balls.BallInterface;
 import com.innowise.Exceptions.EmptyArrayException;
 
 public interface Sortable {
 
-  Ball[] sort(Ball[] balls, int k) throws EmptyArrayException;
+  BallInterface[] sort(BallInterface[] balls, int k) throws EmptyArrayException;
 }
