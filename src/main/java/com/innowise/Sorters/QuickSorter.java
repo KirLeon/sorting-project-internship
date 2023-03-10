@@ -1,11 +1,11 @@
 package com.innowise.Sorters;
 
-import com.innowise.Balls.Ball;
+import com.innowise.Balls.BallInterface;
 import com.innowise.Exceptions.EmptyArrayException;
 
 public class QuickSorter implements Sortable {
 
-  public void sortByColor(Ball[] balls, int begin, int end) {
+  public void sortByColor(BallInterface[] balls, int begin, int end) {
     if (balls.length == 0 || (begin >= end)) {
       return;
     }
@@ -21,7 +21,7 @@ public class QuickSorter implements Sortable {
         LastElementToSort--;
       }
       if (firstElementToSort <= LastElementToSort) {
-        Ball swap = balls[firstElementToSort];
+        BallInterface swap = balls[firstElementToSort];
         balls[firstElementToSort] = balls[LastElementToSort];
         balls[LastElementToSort] = swap;
         firstElementToSort++;
@@ -36,7 +36,7 @@ public class QuickSorter implements Sortable {
     }
   }
 
-  public void sortByDiameter(Ball[] balls, int begin, int end) {
+  public void sortByDiameter(BallInterface[] balls, int begin, int end) {
     if (balls.length == 0 || (begin >= end)) {
       return;
     }
@@ -52,7 +52,7 @@ public class QuickSorter implements Sortable {
         LastElementToSort--;
       }
       if (firstElementToSort <= LastElementToSort) {
-        Ball swap = balls[firstElementToSort];
+        BallInterface swap = balls[firstElementToSort];
         balls[firstElementToSort] = balls[LastElementToSort];
         balls[LastElementToSort] = swap;
         firstElementToSort++;
@@ -67,7 +67,7 @@ public class QuickSorter implements Sortable {
     }
   }
 
-  public void sortByWeight(Ball[] balls, int begin, int end) {
+  public void sortByWeight(BallInterface[] balls, int begin, int end) {
     if (balls.length == 0 || (begin >= end)) {
       return;
     }
@@ -83,7 +83,7 @@ public class QuickSorter implements Sortable {
         LastElementToSort--;
       }
       if (firstElementToSort <= LastElementToSort) {
-        Ball swap = balls[firstElementToSort];
+        BallInterface swap = balls[firstElementToSort];
         balls[firstElementToSort] = balls[LastElementToSort];
         balls[LastElementToSort] = swap;
         firstElementToSort++;
@@ -99,7 +99,7 @@ public class QuickSorter implements Sortable {
   }
 
   @Override
-  public Ball[] sort(Ball[] balls, int sortTypeIndex) throws EmptyArrayException {
+  public BallInterface[] sort(BallInterface[] balls, int sortTypeIndex) throws EmptyArrayException {
     if (balls == null) {
       throw new EmptyArrayException("Array is empty");
     }
@@ -109,7 +109,7 @@ public class QuickSorter implements Sortable {
         throw new EmptyArrayException(exception);
       }
     }
-    Ball[] resultArray = new Ball[balls.length];
+    BallInterface[] resultArray = new BallInterface[balls.length];
     int begin = 0;
     int end = balls.length - 1;
     switch (Math.abs(sortTypeIndex)) {

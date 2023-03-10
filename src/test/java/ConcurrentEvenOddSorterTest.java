@@ -1,5 +1,5 @@
+import com.innowise.Balls.BallInterface;
 import com.innowise.Balls.Ball;
-import com.innowise.Balls.BallImplementation;
 import com.innowise.Balls.Colors;
 import com.innowise.ConcurrentSorters.ConcurrentEvenOddSorter;
 import com.innowise.Exceptions.EmptyArrayException;
@@ -10,24 +10,24 @@ import org.junit.jupiter.api.Test;
 
 public class ConcurrentEvenOddSorterTest {
 
-  private static Ball[] balls;
+  private static BallInterface[] balls;
   private static ConcurrentEvenOddSorter sorter;
 
   @BeforeAll
   public static void setup() {
-    balls = new Ball[7];
+    balls = new BallInterface[7];
     sorter = new ConcurrentEvenOddSorter();
   }
 
   @BeforeEach
   public void clean() {
-    Ball ball1 = new BallImplementation(17.4, 19.8, Colors.CYAN);
-    Ball ball2 = new BallImplementation(39.2, 27.0, Colors.GREEN);
-    Ball ball3 = new BallImplementation(44.0, 13.0, Colors.YELLOW);
-    Ball ball4 = new BallImplementation(17.4, 52.3, Colors.PURPLE);
-    Ball ball5 = new BallImplementation(17.4, 18.4, Colors.WHITE);
-    Ball ball6 = new BallImplementation(26.4, 19.8, Colors.YELLOW);
-    Ball ball7 = new BallImplementation(28, 23, Colors.ORANGE);
+    BallInterface ball1 = new Ball(17.4, 19.8, Colors.CYAN);
+    BallInterface ball2 = new Ball(39.2, 27.0, Colors.GREEN);
+    BallInterface ball3 = new Ball(44.0, 13.0, Colors.YELLOW);
+    BallInterface ball4 = new Ball(17.4, 52.3, Colors.PURPLE);
+    BallInterface ball5 = new Ball(17.4, 18.4, Colors.WHITE);
+    BallInterface ball6 = new Ball(26.4, 19.8, Colors.YELLOW);
+    BallInterface ball7 = new Ball(28, 23, Colors.ORANGE);
     balls[0] = ball1;
     balls[1] = ball2;
     balls[2] = ball3;
@@ -39,8 +39,8 @@ public class ConcurrentEvenOddSorterTest {
 
   @Test
   public void mergeCheckExceptionTest() {
-    Ball[] emptyBalls = null;
-    Ball[] halfEmptyBallArray = new Ball[]{balls[2], balls[5], null, balls[1], null};
+    BallInterface[] emptyBalls = null;
+    BallInterface[] halfEmptyBallArray = new BallInterface[]{balls[2], balls[5], null, balls[1], null};
     EmptyArrayException thrownException1 = Assertions.assertThrows(EmptyArrayException.class,
         () -> sorter.sort(emptyBalls, -3));
     EmptyArrayException thrownException2 = Assertions.assertThrows(EmptyArrayException.class,

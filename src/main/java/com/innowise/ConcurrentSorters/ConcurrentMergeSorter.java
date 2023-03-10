@@ -1,31 +1,31 @@
 package com.innowise.ConcurrentSorters;
 
-import com.innowise.Balls.Ball;
+import com.innowise.Balls.BallInterface;
 import com.innowise.Exceptions.EmptyArrayException;
 import com.innowise.Sorters.Sortable;
 
 public class ConcurrentMergeSorter implements Sortable {
 
-  public Ball[] sortByColor(Ball[] balls) {
+  public BallInterface[] sortByColor(BallInterface[] balls) {
     switch (balls.length) {
       case 1 -> {
         return balls;
       }
       case 2 -> {
         if (balls[0].getColor().ordinal() > balls[1].getColor().ordinal()) {
-          Ball swapBall = balls[0];
+          BallInterface swapBall = balls[0];
           balls[0] = balls[1];
           balls[1] = swapBall;
         }
         return balls;
       }
       default -> {
-        Ball[] leftHalfArray;
-        Ball[] rightHalfArray;
+        BallInterface[] leftHalfArray;
+        BallInterface[] rightHalfArray;
         int sizeOfRightArray = balls.length / 2;
-        rightHalfArray = new Ball[sizeOfRightArray];
+        rightHalfArray = new BallInterface[sizeOfRightArray];
         int sizeOfLeftArray = balls.length % 2 == 0 ? sizeOfRightArray : sizeOfRightArray + 1;
-        leftHalfArray = new Ball[sizeOfLeftArray];
+        leftHalfArray = new BallInterface[sizeOfLeftArray];
         sizeOfRightArray = 0;
         for (int i = 0; i < balls.length; i++) {
           if (i < sizeOfLeftArray) {
@@ -36,18 +36,8 @@ public class ConcurrentMergeSorter implements Sortable {
           }
         }
         try {
-          Thread leftSorterThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-              sortByColor(rightHalfArray);
-            }
-          });
-          Thread rightSorterThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-              sortByColor(leftHalfArray);
-            }
-          });
+          Thread leftSorterThread = new Thread(() -> sortByColor(rightHalfArray));
+          Thread rightSorterThread = new Thread(() -> sortByColor(leftHalfArray));
           leftSorterThread.start();
           rightSorterThread.start();
           leftSorterThread.join();
@@ -86,26 +76,26 @@ public class ConcurrentMergeSorter implements Sortable {
     }
   }
 
-  public Ball[] sortByDiameter(Ball[] balls) {
+  public BallInterface[] sortByDiameter(BallInterface[] balls) {
     switch (balls.length) {
       case 1 -> {
         return balls;
       }
       case 2 -> {
         if (balls[0].getDiameter() > balls[1].getDiameter()) {
-          Ball swapBall = balls[0];
+          BallInterface swapBall = balls[0];
           balls[0] = balls[1];
           balls[1] = swapBall;
         }
         return balls;
       }
       default -> {
-        Ball[] leftHalfArray;
-        Ball[] rightHalfArray;
+        BallInterface[] leftHalfArray;
+        BallInterface[] rightHalfArray;
         int sizeOfRightArray = balls.length / 2;
-        rightHalfArray = new Ball[sizeOfRightArray];
+        rightHalfArray = new BallInterface[sizeOfRightArray];
         int sizeOfLeftArray = balls.length % 2 == 0 ? sizeOfRightArray : sizeOfRightArray + 1;
-        leftHalfArray = new Ball[sizeOfLeftArray];
+        leftHalfArray = new BallInterface[sizeOfLeftArray];
         sizeOfRightArray = 0;
         for (int i = 0; i < balls.length; i++) {
           if (i < sizeOfLeftArray) {
@@ -116,18 +106,8 @@ public class ConcurrentMergeSorter implements Sortable {
           }
         }
         try {
-          Thread leftSorterThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-              sortByDiameter(rightHalfArray);
-            }
-          });
-          Thread rightSorterThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-              sortByDiameter(leftHalfArray);
-            }
-          });
+          Thread leftSorterThread = new Thread(() -> sortByDiameter(rightHalfArray));
+          Thread rightSorterThread = new Thread(() -> sortByDiameter(leftHalfArray));
           leftSorterThread.start();
           rightSorterThread.start();
           leftSorterThread.join();
@@ -165,26 +145,26 @@ public class ConcurrentMergeSorter implements Sortable {
     }
   }
 
-  public Ball[] sortByWeight(Ball[] balls) {
+  public BallInterface[] sortByWeight(BallInterface[] balls) {
     switch (balls.length) {
       case 1 -> {
         return balls;
       }
       case 2 -> {
         if (balls[0].getWeight() > balls[1].getWeight()) {
-          Ball swapBall = balls[0];
+          BallInterface swapBall = balls[0];
           balls[0] = balls[1];
           balls[1] = swapBall;
         }
         return balls;
       }
       default -> {
-        Ball[] leftHalfArray;
-        Ball[] rightHalfArray;
+        BallInterface[] leftHalfArray;
+        BallInterface[] rightHalfArray;
         int sizeOfRightArray = balls.length / 2;
-        rightHalfArray = new Ball[sizeOfRightArray];
+        rightHalfArray = new BallInterface[sizeOfRightArray];
         int sizeOfLeftArray = balls.length % 2 == 0 ? sizeOfRightArray : sizeOfRightArray + 1;
-        leftHalfArray = new Ball[sizeOfLeftArray];
+        leftHalfArray = new BallInterface[sizeOfLeftArray];
         sizeOfRightArray = 0;
         for (int i = 0; i < balls.length; i++) {
           if (i < sizeOfLeftArray) {
@@ -195,18 +175,8 @@ public class ConcurrentMergeSorter implements Sortable {
           }
         }
         try {
-          Thread leftSorterThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-              sortByWeight(rightHalfArray);
-            }
-          });
-          Thread rightSorterThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-              sortByWeight(leftHalfArray);
-            }
-          });
+          Thread leftSorterThread = new Thread(() -> sortByWeight(rightHalfArray));
+          Thread rightSorterThread = new Thread(() -> sortByWeight(leftHalfArray));
           leftSorterThread.start();
           rightSorterThread.start();
           leftSorterThread.join();
@@ -245,7 +215,7 @@ public class ConcurrentMergeSorter implements Sortable {
   }
 
   @Override
-  public Ball[] sort(Ball[] balls, int sortTypeIndex) throws EmptyArrayException {
+  public BallInterface[] sort(BallInterface[] balls, int sortTypeIndex) throws EmptyArrayException {
     if (balls == null) {
       throw new EmptyArrayException("Array is empty");
     }
@@ -255,7 +225,7 @@ public class ConcurrentMergeSorter implements Sortable {
         throw new EmptyArrayException(exception);
       }
     }
-    Ball[] resultArray = new Ball[balls.length];
+    BallInterface[] resultArray = new BallInterface[balls.length];
     switch (Math.abs(sortTypeIndex)) {
       case 1 -> sortByColor(balls);
       case 2 -> sortByDiameter(balls);
